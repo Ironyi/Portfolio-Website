@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="Favico.png" type="image/png" />
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ian Kuo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="hero-section">
+    <h1 class="gradient-name fade-up delay-0">Ian <span>Kuo</span></h1>
+<h2 class="fade-up delay-1">Creating tools, sound, and stories through code</h2>
+<p class="fade-up delay-2">Exploring the intersection of creativity & technology</p>
+
+    <h2 class="typing-text fade-up delay-3">
+      I’m a <span id="typed-role"></span>
+    </h2>
+    <script>
+  const roles = ["Singer", "Sound Designer", 
+                 "Creative Coder", "Audio Engineer", "AI Enthusiast"];
+  let i = 0, j = 0, forward = true;
+  const span = document.getElementById("typed-role");
+
+  function typeLoop() {
+    if (forward) {
+      span.textContent = roles[i].slice(0, ++j);
+      if (j === roles[i].length) forward = false;
+    } else {
+      span.textContent = roles[i].slice(0, --j);
+      if (j === 0) {
+        forward = true;
+        i = (i + 1) % roles.length;
+      }
+    }
+    setTimeout(typeLoop, forward ? 100 : 65);
+  }
+
+  typeLoop();
+</script>
+
+
+    <div class="button-group fade-up delay-4">
+      <a href="projects.html" class="btn-primary">View Projects</a>
+      <a href="contact.html" class="btn-secondary">Get in Touch</a>
+    </div>
+  </main>
+  <script src="inject-header.js"></script>
+  <script>
+    // Only add fade classes after DOM is ready
+    window.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-ready");
+      requestAnimationFrame(() => {
+        document.body.classList.add("fade-in");
+      });
+    });
+  
+    // Handle link transitions
+    document.querySelectorAll('a').forEach(link => {
+      const isInternal = link.hostname === window.location.hostname;
+      if (isInternal && !link.hasAttribute("download") && !link.target) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const url = this.href;
+          document.body.classList.remove("fade-in");
+          document.body.classList.add("fade-out");
+          setTimeout(() => {
+            window.location.href = url;
+          }, 300);
+        });
+      }
+    });
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="Favico.png" type="image/png" />
+  <meta charset="UTF-8" />
+  <title>Contact</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+ 
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("V1CzIU7XIPLjwgWPT");
+    })();
+  </script>
+  
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+
+
+  <div class="contact-container slide-up">
+    <div class="contact-form slide-up">
+      
+      <section class="contact-wrappe slide-up">
+        <div class="contact-card">
+          <div class="contact-heading-row">
+            <p class="subheading">Get in touch</p>
+            <div class="linkedin-inline">
+              <a href="https://www.linkedin.com/in/ian-j-kuo" target="_blank" class="linkedin-btn">
+                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" />
+                Connect
+              </a>
+            </div>
+          </div>
+          
+          
+          <h1 class="contact-title">Contact.</h1>
+
+          
+      
+          <form id="contact-form">
+            <div class="form-row">
+              <label>
+                <span class="icon-label"><i class="fas fa-user"></i> Name</span>
+                <input type="text" name="name" placeholder="Your name" />
+              </label>
+              
+              <label>
+                <span class="icon-label"><i class="fas fa-envelope"></i> Email</span>
+                <input type="email" name="email" placeholder="Your email" />
+              </label>
+              
+              <label class="full">
+                <span class="icon-label"><i class="fas fa-comment-dots"></i> Message</span>
+                <textarea name="message" placeholder="Your message..." rows="5"></textarea>
+              </label>
+              
+      
+            <button type="submit" class="btn-submit">Send</button>
+          </form>
+        </div>
+      </section>
+      
+      
+      <script>
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          emailjs.send("service_3h7ty7t", "template_2xc852t", {
+            name: this.name.value,
+            email: this.email.value,
+            message: this.message.value
+          }).then(() => {
+            alert("Message sent!");
+            this.reset();
+          }, (err) => {
+            alert("Failed to send. Try again later.");
+          });
+        });
+      </script>
+      
+    </div>
+
+    <div class="contact-visual">
+      <img src="images/Clear-bear.png"/>
+    </div>
+  </div>
+  <script src="inject-header.js"></script>
+  <script>
+    window.addEventListener("load", function () {
+      window.scrollTo({
+        top: 250, // scroll down 100 pixels
+        behavior: "smooth" // optional smooth scroll
+      });
+    });
+  </script>
+  
+
+</body>
+</html>
