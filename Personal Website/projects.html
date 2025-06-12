@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="Favico.png" type="image/png" />
+  <meta charset="UTF-8" />
+  <title>Projects</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .projects-landing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      height: calc(100vh - 80px); /* Adjust if your header is taller/shorter */
+      margin-top: 0px;
+      background-color: #0f172a;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+
+    .page-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      opacity: 0;
+      animation: popIn 1.2s ease-out forwards;
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="projects-landing">
+    <h1 class="page-title">Explore My Projects</h1>
+  </main>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "music-projects.html";
+    }, 2500); // Redirect after 2.5 seconds
+  </script>
+
+  <script src="inject-header.js"></script>
+</body>
+</html>

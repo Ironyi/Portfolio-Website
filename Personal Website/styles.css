@@ -993,3 +993,26 @@ input:focus, textarea:focus {
   margin: 1em 0;
   object-fit: cover; /* optional: trims overflow instead of stretching */
 }
+
+.github-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  text-decoration: none;
+  font-weight: 600;
+  color: white;
+  background-color: #24292e;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.github-button:hover {
+  background-color: #333;
+}
+
+.github-button .icon {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
+}

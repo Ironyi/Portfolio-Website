@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="Favico.png" type="image/png" />
+  <meta charset="UTF-8" />
+  <title>Hardware Projects</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <main class="projects-section slide-up">
+    <h1 class="page-title">Hardware Projects</h1>
+
+    <nav class="sub-project-nav">
+      <a href="music-projects.html">Music</a>
+      <a href="performance-projects.html">Performances</a>
+      <a href="hardware-projects.html" class="active">Hardware</a>
+      <a href="design-projects.html">Designs</a>
+    </nav>
+
+    <div class="project-card">
+      <div class="video-wrapper">
+        <iframe width="100%" height="400" src="https://www.youtube.com/embed/oDS07Lg61ZA?si=hW-fXTx320A6v7vu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <h2 class="highlight">Visually Triggered Drum Sequencer</h2>
+      <p>
+        A four button keyboard and step sequencer with a thermal camera gimmick. It is all powered by a Teensy 4.1 microcontroller. The drum sequencer has 3 different channels: kick, snare, and hi-hat. Some yellow LEDs show which beat you are currently on, 1-4, and another set of green LEDs tell you which instrument you are on. The thermal camera is interactive, displaying heat signatures onto a color-coded 8x8 heatmap showing you how hot or cold the visual is. 
+      </p>
+    </div>
+
+    <div class="project-card">
+      <div class="video-wrapper">
+        <iframe width="100%" height="400" src="https://www.youtube.com/embed/1Yrtsdke3x4?si=M3jzKbpftD4f_zk9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <h2 class="highlight">Analog Synthesizer</h2>
+      <p>
+        An eight button analog button-controlled keyboard synthesizer made purely with an Operational Amplifier and Voltage.
+      </p>
+    </div>
+  </main>
+
+  <script src="inject-header.js"></script>
+</body>
+</html>

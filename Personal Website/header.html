@@ -1,0 +1,35 @@
+<header class="site-header">
+  <div class="logo">
+    <a href="index.html">
+      <img src="images/Gradiant-Initials.png" alt="IK Logo" class="logo-img" />
+    </a>
+  </div>
+
+  <!-- Hamburger icon -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <nav>
+    <ul class="nav-links" id="navMenu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById("navMenu");
+      nav.classList.toggle("active");
+    }
+  </script>
+  
+</header>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const headerPlaceholder = document.getElementById("header-placeholder");
+    if (headerPlaceholder) {
+      headerPlaceholder.innerHTML = document.querySelector(".site-header").outerHTML;
+    }
+  });
