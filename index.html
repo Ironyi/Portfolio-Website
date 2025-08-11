@@ -8,6 +8,7 @@
   <title>Ian Kuo</title>
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <div id="header-placeholder"></div>
@@ -23,13 +24,18 @@
     <script>
   const roles = ["Singer", "Sound Designer", 
                  "Creative Coder", "Audio Engineer", "AI Enthusiast"];
-  let i = 0, j = 0, forward = true;
+  let i = 0, j = 0, forward = true, timeoutId;
   const span = document.getElementById("typed-role");
 
   function typeLoop() {
     if (forward) {
       span.textContent = roles[i].slice(0, ++j);
-      if (j === roles[i].length) forward = false;
+      if (j === roles[i].length) {
+        forward = false;
+        // Pause longer when word is complete
+        timeoutId = setTimeout(typeLoop, 2000);
+        return;
+      }
     } else {
       span.textContent = roles[i].slice(0, --j);
       if (j === 0) {
@@ -37,10 +43,21 @@
         i = (i + 1) % roles.length;
       }
     }
-    setTimeout(typeLoop, forward ? 100 : 65);
+    // Use longer delays to reduce CPU usage
+    timeoutId = setTimeout(typeLoop, forward ? 120 : 80);
   }
 
+  // Start animation
   typeLoop();
+  
+  // Pause animation when page is not visible
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearTimeout(timeoutId);
+    } else {
+      typeLoop();
+    }
+  });
 </script>
 
 

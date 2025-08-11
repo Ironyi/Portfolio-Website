@@ -43,4 +43,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+
+  // Load footer from footer.html into placeholder (skip on home page)
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  if (currentPage !== "index.html") {
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        // Create footer placeholder if it doesn't exist
+        let footerPlaceholder = document.getElementById("footer-placeholder");
+        if (!footerPlaceholder) {
+          footerPlaceholder = document.createElement("div");
+          footerPlaceholder.id = "footer-placeholder";
+          document.body.appendChild(footerPlaceholder);
+        }
+        footerPlaceholder.innerHTML = data;
+      })
+      .catch(err => console.log("Footer not found, skipping..."));
+  }
 });
