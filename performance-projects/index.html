@@ -1,1 +1,126 @@
-// ...existing code from performance-projects.html...
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="Favico.png" type="image/png" />
+  <meta charset="UTF-8" />
+  <title>Performance Projects</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .video-thumbnail {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1em 0;
+    }
+    
+    .video-thumbnail::after {
+      content: '▶';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      font-size: 4rem;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .video-thumbnail:hover::after {
+      background: rgba(167, 139, 250, 0.9);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+
+  
+  <main class="projects-section slide-up">
+    <h1 class="page-title">Performances & Competitions</h1>
+
+    <nav class="sub-project-nav">
+  <a href="/music-projects/">Music</a>
+  <a href="/performance-projects/" class="active">Performances</a>
+  <a href="/hardware-projects/">Hardware</a>
+  <a href="/design-projects/">Designs</a>
+    </nav>
+    
+    <div class="project-card">
+        <h2><span class="highlight">"Our Love is Here to Stay"</span> — <span class="category">George Gershwin</span></h2>
+        <p>
+          Rising Star:Behind the Mask, an Emmy Nominated Television Broadcast, Edited by Ian Kuo
+        </p>
+      
+        <!-- Lazy-loaded YouTube video -->
+        <div class="video-thumbnail" 
+             style="background-image: url('https://img.youtube.com/vi/FXrLUSZ8mUk/maxresdefault.jpg')"
+             onclick="loadVideo(this, 'FXrLUSZ8mUk')">
+        </div>
+    
+      </div>
+
+    <h1 class="page-title">Competitions</h1>
+      
+    <div class="project-card">
+      <h2><span class="highlight">"The Very Thought of You"</span> — <span class="category">Ray Noble</span></h2>
+      <p>
+        Honorable Award of the 2021 American Music Talent Competition
+      </p>
+      <div class="video-thumbnail" 
+           style="background-image: url('https://img.youtube.com/vi/bB3bpuxExIA/maxresdefault.jpg')"
+           onclick="loadVideo(this, 'bB3bpuxExIA')">
+      </div>
+      
+    </div>
+
+    <div class="project-card">
+        <h2><span class="highlight">"Sleep"</span> — <span class="category">Ivor Gurney</span></h2>
+        <div class="video-thumbnail" 
+             style="background-image: url('https://img.youtube.com/vi/zDvpFqy1X8Y/maxresdefault.jpg')"
+             onclick="loadVideo(this, 'zDvpFqy1X8Y')">
+        </div>
+        
+    </div>
+
+    <div class="project-card">
+        <h2><span class="highlight">"Der Nussbaum"</span> — <span class="category">Robert Schumann</span></h2>
+        <div class="video-thumbnail" 
+             style="background-image: url('https://img.youtube.com/vi/EbNa6Nd-eLI/maxresdefault.jpg')"
+             onclick="loadVideo(this, 'EbNa6Nd-eLI')">
+        </div>
+
+  </main>
+  
+  <script>
+    function loadVideo(element, videoId) {
+      const iframe = document.createElement('iframe');
+      iframe.width = '100%';
+      iframe.height = '400';
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      iframe.title = 'YouTube video player';
+      iframe.frameBorder = '0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.style.borderRadius = '8px';
+      
+      element.parentNode.replaceChild(iframe, element);
+    }
+  </script>
+  
+  <script src="inject-header.js"></script>
+</body>
+</html>

@@ -1,1 +1,102 @@
-// ...existing code from music-projects.html...
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="Favico.png" type="image/png" />
+  <meta charset="UTF-8" />
+  <title>Music Projects</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .video-thumbnail {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1em 0;
+    }
+    
+    .video-thumbnail::after {
+      content: '▶';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,0.8);
+      color: white;
+      font-size: 4rem;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    .video-thumbnail:hover::after {
+      background: rgba(167, 139, 250, 0.9);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+
+  
+  <main class="projects-section slide-up">
+    <h1 class="page-title">Production & Engineering</h1>
+
+    <nav class="sub-project-nav">
+  <a href="/music-projects/" class="active">Music</a>
+  <a href="/performance-projects/">Performances</a>
+  <a href="/hardware-projects/">Hardware</a>
+  <a href="/design-projects/">Designs</a>
+    </nav>
+    
+    <div class="project-card">
+      <h2><span class="highlight">"Everything"</span> — <span class="category">Production & Engineering</span></h2>
+      <p>
+        A collaborative production bringing together R&B and soul influences...
+      </p>
+    
+      <!-- Lazy-loaded YouTube video with placeholder -->
+      <div class="video-thumbnail" 
+           style="background-image: url('https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg')"
+           onclick="loadVideo(this, 'YOUR_VIDEO_ID')">
+      </div>
+    
+      <div class="credits-box">
+        <h3>Production Team:</h3>
+        <p>
+          Artist: Tricia Manada<br />
+          Production, Editing: Ian Kuo<br />
+          Mastering: Harry Zhao
+    
+    </div>
+  </main>
+  
+  <script>
+    function loadVideo(element, videoId) {
+      const iframe = document.createElement('iframe');
+      iframe.width = '100%';
+      iframe.height = '400';
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      iframe.title = 'YouTube video player';
+      iframe.frameBorder = '0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.style.borderRadius = '8px';
+      
+      element.parentNode.replaceChild(iframe, element);
+    }
+  </script>
+  
+  <script src="inject-header.js"></script>
+</body>
+</html>
