@@ -14,34 +14,69 @@ document.addEventListener("DOMContentLoaded", function () {
         if (href === currentPage) {
           link.classList.add("active");
         }
+
+        // Collapse mobile menu after selecting a destination.
+        link.addEventListener("click", () => {
+          const navMenu = document.getElementById("navMenu");
+          const toggle = document.querySelector(".menu-toggle");
+          if (navMenu) {
+            navMenu.classList.remove("active");
+          }
+          if (toggle) {
+            toggle.setAttribute("aria-expanded", "false");
+          }
+        });
+      });
+
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navMenu = document.getElementById("navMenu");
+
+      // Close open mobile menu when clicking outside the header.
+      document.addEventListener("click", (event) => {
+        if (!menuToggle || !navMenu) return;
+        if (!navMenu.classList.contains("active")) return;
+        if (menuToggle.contains(event.target) || navMenu.contains(event.target)) return;
+        navMenu.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
       });
 
       // Now that the header is injected, run scroll logic
       let lastScrollY = window.scrollY;
       let ticking = false;
       const header = document.querySelector(".site-header");
+      const isMobileViewport = window.matchMedia("(max-width: 768px)").matches;
 
       function updateHeaderVisibility() {
         const currentScrollY = window.scrollY;
+        const delta = currentScrollY - lastScrollY;
 
-        if (currentScrollY > 100) {
-          if (currentScrollY > lastScrollY) {
-            header.classList.add("hidden");
-          } else {
-            header.classList.remove("hidden");
-          }
+        // Ignore tiny scroll fluctuations that cause visual jitter.
+        if (Math.abs(delta) < 6) {
+          ticking = false;
+          return;
+        }
+
+        if (currentScrollY <= 100) {
+          header.classList.remove("hidden");
+        } else if (delta > 0) {
+          header.classList.add("hidden");
+        } else {
+          header.classList.remove("hidden");
         }
 
         lastScrollY = currentScrollY;
         ticking = false;
       }
 
-      window.addEventListener("scroll", () => {
-        if (!ticking) {
-          window.requestAnimationFrame(updateHeaderVisibility);
-          ticking = true;
-        }
-      });
+      // Avoid hide/reveal scroll work on small screens to reduce jank.
+      if (!isMobileViewport) {
+        window.addEventListener("scroll", () => {
+          if (!ticking) {
+            window.requestAnimationFrame(updateHeaderVisibility);
+            ticking = true;
+          }
+        }, { passive: true });
+      }
     });
 
   // Load footer from footer.html into placeholder (skip on home page)

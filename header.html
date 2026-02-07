@@ -6,7 +6,7 @@
   </div>
 
   <!-- Hamburger icon -->
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-controls="navMenu" aria-expanded="false">☰</button>
 
   <nav>
     <ul class="nav-links" id="navMenu">
@@ -20,16 +20,11 @@
     function toggleMenu() {
       const nav = document.getElementById("navMenu");
       nav.classList.toggle("active");
+      const toggle = document.querySelector(".menu-toggle");
+      if (toggle) {
+        toggle.setAttribute("aria-expanded", nav.classList.contains("active") ? "true" : "false");
+      }
     }
   </script>
   
 </header>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const headerPlaceholder = document.getElementById("header-placeholder");
-    if (headerPlaceholder) {
-      headerPlaceholder.innerHTML = document.querySelector(".site-header").outerHTML;
-    }
-  });

@@ -24,10 +24,12 @@
     <script>
   const roles = ["Singer", "Sound Designer", 
                  "Creative Coder", "Audio Engineer", "AI Enthusiast"];
-  let i = 0, j = 0, forward = true, timeoutId;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let i = 0, j = 0, forward = true, timeoutId, isTyping = false;
   const span = document.getElementById("typed-role");
 
   function typeLoop() {
+    isTyping = true;
     if (forward) {
       span.textContent = roles[i].slice(0, ++j);
       if (j === roles[i].length) {
@@ -43,19 +45,26 @@
         i = (i + 1) % roles.length;
       }
     }
-    // Use longer delays to reduce CPU usage
-    timeoutId = setTimeout(typeLoop, forward ? 120 : 80);
+    // Keep updates smooth without overloading the main thread.
+    timeoutId = setTimeout(typeLoop, forward ? 140 : 110);
   }
 
-  // Start animation
-  typeLoop();
+  if (prefersReducedMotion) {
+    span.textContent = roles[0];
+  } else {
+    typeLoop();
+  }
   
   // Pause animation when page is not visible
   document.addEventListener('visibilitychange', () => {
+    if (prefersReducedMotion) return;
     if (document.hidden) {
       clearTimeout(timeoutId);
+      isTyping = false;
     } else {
-      typeLoop();
+      if (!isTyping) {
+        typeLoop();
+      }
     }
   });
 </script>
@@ -77,20 +86,23 @@
     });
   
     // Handle link transitions
-    document.querySelectorAll('a').forEach(link => {
-      const isInternal = link.hostname === window.location.hostname;
-      if (isInternal && !link.hasAttribute("download") && !link.target) {
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          const url = this.href;
-          document.body.classList.remove("fade-in");
-          document.body.classList.add("fade-out");
-          setTimeout(() => {
-            window.location.href = url;
-          }, 300);
-        });
-      }
-    });
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduceMotion) {
+      document.querySelectorAll('a').forEach(link => {
+        const isInternal = link.hostname === window.location.hostname;
+        if (isInternal && !link.hasAttribute("download") && !link.target) {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const url = this.href;
+            document.body.classList.remove("fade-in");
+            document.body.classList.add("fade-out");
+            setTimeout(() => {
+              window.location.href = url;
+            }, 250);
+          });
+        }
+      });
+    }
   </script>
   
 </body>

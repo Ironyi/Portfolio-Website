@@ -55,11 +55,11 @@ body::before {
     #9333ea
   );
   opacity: 0.05;
-  animation: moveBackground 15s ease-in-out infinite;
+  animation: none;
   background-size: 300% 300%;
-  /* Removed expensive blur filter for better performance */
-  will-change: background-position; /* Optimize for animation */
-  transform: translateZ(0); /* Force hardware acceleration */
+  /* Static background performs much better than continuous viewport repaints. */
+  will-change: auto;
+  transform: none;
 }
 
 @keyframes moveBackground {
@@ -79,12 +79,13 @@ body::before {
   right: 0;
   z-index: 1000;
   background-color: #0f172a;
-  transition: top 0.3s ease;
+  transition: transform 0.24s ease;
+  will-change: transform;
 }
 
 /* Hide the header by moving it up */
 .site-header.hidden {
-  top: -100px; /* adjust to header height */
+  transform: translateY(-110%);
 }
 
 
@@ -181,7 +182,7 @@ body::before {
   border-radius: 10px;
   font-weight: 600;
   font-size: 1rem;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
   min-width: 160px; /* Optional: makes them consistent width */
   text-align: center;
   display: inline-block;
@@ -238,7 +239,7 @@ body::before {
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .project-categories button:hover {
@@ -1097,7 +1098,7 @@ input:focus, textarea:focus {
   color: #cbd5e1;
   border-radius: 8px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
   font-size: 1.2rem;
   line-height: 1;
   position: relative;
@@ -1138,5 +1139,389 @@ input:focus, textarea:focus {
   
   .social-links {
     justify-content: center;
+  }
+}
+
+/* Mobile-friendly overrides */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+.site-header {
+  padding: 0.85rem clamp(1rem, 4vw, 2rem);
+}
+
+.nav-links {
+  padding-right: 0;
+}
+
+.site-header nav {
+  position: relative;
+}
+
+.sub-project-nav {
+  flex-wrap: wrap;
+}
+
+.video-wrapper iframe,
+.project-card iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 1024px) {
+  body {
+    padding-top: 72px;
+  }
+
+  .hero-section {
+    padding: 8vh 1.5rem;
+  }
+
+  .gradient-name {
+    font-size: clamp(2.6rem, 8vw, 4rem);
+  }
+
+  .contact-container {
+    min-height: auto;
+  }
+
+  .contact-wrapper {
+    min-height: auto;
+    padding: 1.5rem;
+  }
+
+  .contact-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 68px;
+    text-align: left;
+  }
+
+  .site-header {
+    min-height: 68px;
+  }
+
+  .logo {
+    margin-right: 0;
+  }
+
+  .logo-img {
+    height: 34px;
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 1.65rem;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+    border-radius: 8px;
+  }
+
+  .menu-toggle:focus-visible {
+    outline: 2px solid #a78bfa;
+    outline-offset: 2px;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    width: 100%;
+    background-color: #0f172a;
+    border-top: 1px solid #1f2937;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.35rem 0;
+    z-index: 1001;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0.85rem 1rem;
+    border-radius: 0;
+  }
+
+  .nav-links a::after {
+    display: none;
+  }
+
+  .hero-section {
+    min-height: calc(100vh - 68px);
+    padding: 5rem 1rem 3rem;
+    text-align: center;
+  }
+
+  .hero-section h2 {
+    font-size: 1.2rem;
+  }
+
+  .typing-text {
+    font-size: 1.15rem;
+    min-height: 1.6rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .button-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .projects-section,
+  .about-section {
+    padding: 2rem 1rem;
+  }
+
+  .page-title {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .project-card {
+    padding: 1.25rem;
+    margin: 1.25rem auto;
+    border-radius: 12px;
+  }
+
+  .project-card h2 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+
+  .project-box {
+    width: 100%;
+    max-width: 440px;
+    padding: 1.4rem 1.2rem;
+    font-size: 1.15rem;
+  }
+
+  .sub-project-nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 0.5rem;
+    padding: 0.5rem 0 1rem;
+  }
+
+  .sub-project-nav a {
+    flex: 0 0 auto;
+  }
+
+  .video-thumbnail {
+    height: clamp(190px, 52vw, 320px) !important;
+  }
+
+  .about-hero.with-background {
+    min-height: 0;
+    padding: 1rem 0;
+    display: block;
+  }
+
+  .about-hero .about-text {
+    max-width: none;
+  }
+
+  .about-text h1 {
+    font-size: clamp(1.85rem, 7vw, 2.45rem);
+  }
+
+  .background-image {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    height: auto;
+    max-width: 420px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .background-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .about-card {
+    flex: 1 1 100%;
+    padding: 1.25rem;
+  }
+
+  .contact-container {
+    flex-direction: column;
+    min-height: auto;
+    padding-top: 68px;
+  }
+
+  .contact-form,
+  .contact-visual {
+    width: 100%;
+    padding: 0;
+  }
+
+  .contact-wrapper {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .contact-card {
+    width: 100%;
+    padding: 1.25rem;
+  }
+
+  .contact-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .contact-title {
+    font-size: clamp(2rem, 10vw, 2.6rem);
+    text-align: left;
+  }
+
+  .linkedin-inline {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .form-row {
+    gap: 1rem;
+  }
+
+  label,
+  .full {
+    flex: 1 1 100%;
+  }
+
+  .btn-submit {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .contact-visual {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding-top: 4rem;
+  }
+
+  .gradient-name {
+    font-size: clamp(2.1rem, 11vw, 2.8rem);
+  }
+
+  .project-categories {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.25rem;
+  }
+
+  .project-categories button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+/* Performance tuning overrides */
+body.fade-ready {
+  transition: opacity 0.25s ease-in-out;
+}
+
+body::before {
+  animation: none;
+  will-change: auto;
+  transform: none;
+  opacity: 0.03;
+}
+
+.btn-primary,
+.btn-secondary {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.project-categories button {
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.project-box {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.project-box:hover {
+  transform: none;
+  box-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+}
+
+.social-links a {
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  body::before {
+    animation: none;
+    opacity: 0.03;
+  }
+
+  .fade-up,
+  .slide-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  body::before {
+    opacity: 0.03;
+  }
+
+  .fade-up,
+  .slide-up {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
