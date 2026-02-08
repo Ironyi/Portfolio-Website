@@ -1,17 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const normalizePath = (path) => {
+    if (!path) return "/";
+    let normalized = path.split("?")[0].split("#")[0];
+    if (normalized === "/index.html") normalized = "/";
+    if (normalized.endsWith("/index.html")) {
+      normalized = normalized.replace(/index\.html$/, "");
+    }
+    if (normalized.length > 1 && normalized.endsWith("/")) {
+      normalized = normalized.slice(0, -1);
+    }
+    return normalized || "/";
+  };
+
   // Load header from header.html into placeholder
-  fetch("header.html")
+  fetch("/header.html")
     .then(res => res.text())
     .then(data => {
       document.getElementById("header-placeholder").innerHTML = data;
 
       // Highlight current nav link
-      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const currentPath = normalizePath(window.location.pathname);
       const navLinks = document.querySelectorAll(".nav-links a");
 
       navLinks.forEach(link => {
         const href = link.getAttribute("href");
-        if (href === currentPage) {
+        const linkPath = normalizePath(new URL(href, window.location.origin).pathname);
+        if (linkPath === currentPath) {
           link.classList.add("active");
         }
 
@@ -80,9 +94,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   // Load footer from footer.html into placeholder (skip on home page)
-  const currentPage = window.location.pathname.split("/").pop() || "index.html";
-  if (currentPage !== "index.html") {
-    fetch("footer.html")
+  const currentPath = normalizePath(window.location.pathname);
+  if (currentPath !== "/") {
+    fetch("/footer.html")
       .then(res => res.text())
       .then(data => {
         // Create footer placeholder if it doesn't exist
