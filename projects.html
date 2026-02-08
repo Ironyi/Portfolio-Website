@@ -7,57 +7,15 @@
   <title>Projects</title>
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    .projects-landing {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      height: calc(100vh - 80px);
-      margin-top: 0px;
-      background-color: #0f172a;
-      /* Removed heavy animations for better performance */
-    }
-
-    .page-title {
-      font-size: 3rem;
-      font-weight: 700;
-      color: white;
-      opacity: 0;
-      animation: quickFadeIn 0.8s ease-out forwards;
-    }
-
-    @keyframes quickFadeIn {
-      from { 
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to { 
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+  <meta http-equiv="refresh" content="0; url=hardware-projects.html">
+  <script>
+    window.location.replace("hardware-projects.html");
+  </script>
 </head>
 <body>
-  <div id="header-placeholder"></div>
-
   <main class="projects-landing">
-    <h1 class="page-title">Explore My Projects</h1>
+    <p>Redirecting to Hardware Projects...</p>
+    <p><a href="hardware-projects.html">Continue</a></p>
   </main>
-
-  <script>
-    // Preload the next page while showing the landing
-    const link = document.createElement('link');
-    link.rel = 'prefetch';
-    link.href = 'music-projects.html';
-    document.head.appendChild(link);
-    
-    setTimeout(() => {
-      window.location.href = "music-projects.html";
-    }, 2000); // Reduced from 2.5s to 2s
-  </script>
-
-  <script src="inject-header.js"></script>
 </body>
 </html>

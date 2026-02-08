@@ -3,6 +3,7 @@
 <head>
   <link rel="icon" href="Favico.png" type="image/png" />
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact</title>
   <link rel="stylesheet" href="styles.css" />
   <link
@@ -12,12 +13,8 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
  
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    (function() {
-      emailjs.init("V1CzIU7XIPLjwgWPT");
-    })();
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   
 </head>
 <body>
@@ -45,46 +42,32 @@
 
           
       
-          <form id="contact-form">
+          <form id="contact-form" data-service-id="service_3h7ty7t" data-template-id="template_2xc852t" data-public-key="V1CzIU7XIPLjwgWPT">
             <div class="form-row">
               <label>
                 <span class="icon-label"><i class="fas fa-user"></i> Name</span>
-                <input type="text" name="name" placeholder="Your name" />
+                <input type="text" name="name" placeholder="Your name" required />
               </label>
               
               <label>
                 <span class="icon-label"><i class="fas fa-envelope"></i> Email</span>
-                <input type="email" name="email" placeholder="Your email" />
+                <input type="email" name="email" placeholder="Your email" required />
               </label>
               
               <label class="full">
                 <span class="icon-label"><i class="fas fa-comment-dots"></i> Message</span>
-                <textarea name="message" placeholder="Your message..." rows="5"></textarea>
+                <textarea name="message" placeholder="Your message..." rows="5" required></textarea>
               </label>
               
             </div>
+            <div class="captcha-wrap">
+              <div class="cf-turnstile" data-sitekey="0x4AAAAAACZMI4_SPT5YSKz9" data-theme="dark"></div>
+            </div>
             <button type="submit" class="btn-submit">Send</button>
+            <p id="contact-status" class="form-status" aria-live="polite"></p>
           </form>
         </div>
       </section>
-      
-      
-      <script>
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-          e.preventDefault();
-          emailjs.send("service_3h7ty7t", "template_2xc852t", {
-            name: this.name.value,
-            email: this.email.value,
-            message: this.message.value
-          }).then(() => {
-            alert("Message sent!");
-            this.reset();
-          }, (err) => {
-            alert("Failed to send. Try again later.");
-          });
-        });
-      </script>
-      
     </div>
 
     <div class="contact-visual">
@@ -92,15 +75,6 @@
     </div>
   </div>
   <script src="inject-header.js"></script>
-  <script>
-    window.addEventListener("load", function () {
-      window.scrollTo({
-        top: 250, // scroll down 100 pixels
-        behavior: "smooth" // optional smooth scroll
-      });
-    });
-  </script>
-  
-
+  <script src="app.js"></script>
 </body>
 </html>
