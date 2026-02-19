@@ -45,6 +45,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const menuToggle = document.querySelector(".menu-toggle");
       const navMenu = document.getElementById("navMenu");
 
+      if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const isOpen = navMenu.classList.toggle("active");
+          menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+      }
+
       // Close open mobile menu when clicking outside the header.
       document.addEventListener("click", (event) => {
         if (!menuToggle || !navMenu) return;

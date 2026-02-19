@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 112" role="img" aria-labelledby="title desc">
+  <title id="title">IK Monogram</title>
+  <desc id="desc">Ian Kuo monogram icon in teal and clay tones.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F8F2E5"/>
+      <stop offset="100%" stop-color="#EADFCB"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B7A75"/>
+      <stop offset="100%" stop-color="#D46A3D"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="104" height="104" rx="26" fill="url(#bg)" stroke="#CBBBA2" stroke-width="2"/>
+  <path d="M34 30h9v52h-9z" fill="url(#ink)"/>
+  <path d="M50 30h9v23l21-23h12L68 56l25 26H80L59 60v22h-9z" fill="#20322F"/>
+  <circle cx="34" cy="24" r="4" fill="#D46A3D"/>
+</svg>

@@ -1,12 +1,12 @@
 <header class="site-header">
   <div class="logo">
     <a href="/">
-      <img src="/images/Gradiant-Initials.png" alt="IK Logo" class="logo-img" />
+      <img src="/images/ik-mark.svg" alt="IK monogram logo" class="logo-img" />
     </a>
   </div>
 
   <!-- Hamburger icon -->
-  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-controls="navMenu" aria-expanded="false">☰</button>
+  <button class="menu-toggle" aria-label="Toggle navigation menu" aria-controls="navMenu" aria-expanded="false">☰</button>
 
   <nav>
     <ul class="nav-links" id="navMenu">
@@ -17,15 +17,4 @@
   <li><a href="/Kuo-Resume.pdf" target="_blank" rel="noopener" class="resume-link">Resume</a></li>
     </ul>
   </nav>
-  <script>
-    function toggleMenu() {
-      const nav = document.getElementById("navMenu");
-      nav.classList.toggle("active");
-      const toggle = document.querySelector(".menu-toggle");
-      if (toggle) {
-        toggle.setAttribute("aria-expanded", nav.classList.contains("active") ? "true" : "false");
-      }
-    }
-  </script>
-  
 </header>
